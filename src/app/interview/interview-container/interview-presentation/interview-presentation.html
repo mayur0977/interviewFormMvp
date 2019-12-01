@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+
+  <div class="container">
+    <div class="row justify-content-center align-items-center" style="height:5vh">
+
+      <div class="col-9">
+        <div class="card">
+          <div class="card-body">
+            <form name="myForm" [formGroup]="interviewDetailsFormGroup" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input type="text" formControlName="firstname" class="form-control" placeholder="First Name" />
+                <div
+                  *ngIf="interviewDetailsFormGroup.get('firstname').touched || interviewDetailsFormGroup.get('firstname').dirty">
+                  <small *ngIf="interviewDetailsFormGroup.get('firstname').hasError('required')" class="text-danger">
+                    first name name is required.
+                  </small><br>
+                  <small *ngIf="interviewDetailsFormGroup.get('firstname').hasError('invalidcharacters')"
+                    class="text-danger">
+                    Enter proper firstname
+                  </small>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Last name" formControlName="lastname" class="form-control" />
+                <div
+                  *ngIf="interviewDetailsFormGroup.get('lastname').touched || interviewDetailsFormGroup.get('lastname').dirty">
+                  <small *ngIf="interviewDetailsFormGroup.get('lastname').hasError('required')" class="text-danger">
+                    Last name is required.
+                  </small><br>
+                  <small *ngIf="interviewDetailsFormGroup.get('lastname').hasError('invalidcharacters')"
+                    class="text-danger">
+                    Enter proper last name
+                  </small>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="email" class="form-control" placeholder="Email ID" />
+                <div
+                  *ngIf="interviewDetailsFormGroup.get('email').touched || interviewDetailsFormGroup.get('email').dirty">
+                  <small *ngIf="interviewDetailsFormGroup.get('email').hasError('required')" class="text-danger">
+                    email is required.
+                  </small><br>
+                  <small *ngIf="interviewDetailsFormGroup.get('email').hasError('invalidemail')" class="text-danger">
+                    Enter proper email
+                  </small>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea formControlName="address" class="form-control" placeholder="Enter Address"></textarea>
+                <!-- <textarea formControlName="address" class="form-control" placeholder="Enter Address" /> -->
+                <div
+                  *ngIf="interviewDetailsFormGroup.get('address').touched || interviewDetailsFormGroup.get('address').dirty">
+                  <small *ngIf="interviewDetailsFormGroup.get('address').hasError('required')" class="text-danger">
+                    address is required.
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input type="text" formControlName="contact" class="form-control" placeholder="Phone number" />
+                <div
+                  *ngIf="interviewDetailsFormGroup.get('contact').touched || interviewDetailsFormGroup.get('contact').dirty">
+                  <small *ngIf="interviewDetailsFormGroup.get('contact').hasError('required')" class="text-danger">
+                    Phone number is required.
+                  </small>
+                  <small *ngIf="interviewDetailsFormGroup.get('contact').hasError('invalidnumber')" class="text-danger">
+                    Enter Valid phone number
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <ngx-dropzone multiple="false" accept="application/pdf" (change)="onSelect($event)">
+                  <ngx-dropzone-label> Drop resume File here...</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngIf="file != null" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ file.name }}</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+                <div
+                  *ngIf="interviewDetailsFormGroup.get('fileResume').touched || interviewDetailsFormGroup.get('fileResume').dirty">
+                  <small *ngIf="interviewDetailsFormGroup.get('fileResume').hasError('required')" class="text-danger">
+                    please provide your resume file
+                  </small>
+                </div>
+              </div>
+              <div class="form-group">
+
+                <button type="button" class="btn btn-reset  btn-sm btn-block"
+                  (click)="this.interviewDetailsFormGroup.reset()">Reset</button>
+
+                <input type="submit" value="Save detail" class="btn btn-success btn-sm btn-block"
+                  [disabled]='!interviewDetailsFormGroup.valid' />
+              </div>
+              <div class="form-group">
+                <h2>{{responseSubmit}}</h2>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
